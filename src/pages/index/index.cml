@@ -1,0 +1,476 @@
+<template>
+  <page title="chameleon">
+    <view class="page-container">
+      <scroller height="{{-1}}">
+        <view class="scroller-wrap">
+          <view class="bwx-demo-page">
+            <view class="bwx-demo-page-header">
+              <text class="bwx-demo-page-title">Chameleon</text>
+              <text class="bwx-demo-page-desc">Chameleon 端接口能力展示</text>
+            </view>
+            <view class="bwx-demo-page-main">
+              <view class="bwx-demo-page-main-list">
+                <view
+                  c-for="{{lists}}"
+                  c-for-index="index"
+                  c-for-item="item"
+                >
+                  <view class="bwx-demo-page-main-list-item">
+                    <view
+                      class="bwx-demo-page-main-list-item-panel"
+                      c-bind:tap="itemClick(item)"
+                    >
+                      <text class="{{item.subOpen ? 'bwx-demo-page-main-list-item-panel-text  color-grey' : 'bwx-demo-page-main-list-item-panel-text'}}">{{item.name}}</text>
+                    </view>
+                    <view
+                      class="bwx-demo-page-main-list-item-panel-sub-list"
+                      c-if="{{item.subList.length && item.subOpen}}"
+                    >
+                      <view
+                        class="bwx-demo-page-main-list-item-panel-sub-list-item"
+                        c-for="{{ item.subList }}"
+                        c-for-index="index"
+                        c-for-item="subItem"
+                        c-bind:tap="subItemClick(subItem)"
+                      >
+                        <text class="bwx-demo-page-main-list-item-panel-sub-list-item-link-text">{{subItem.name}}</text>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <image
+            style="width:50cpx; height:50cpx;"
+            src="{{imageBase64}}"
+          ></image>
+        </view>
+      </scroller>
+    </view>
+  </page>
+</template>
+
+<script>
+import bridge from '../../bridge/index.js';
+console.log(bridge);
+
+const say = msg => {
+  bridge.showToast({
+    message: msg,
+    duration: 3000
+  });
+}
+
+say('当前' + (bridge.inSDK() ? '正' : '未') + '处于SDK中');
+
+class Index {
+  data = {
+    imageBase64: '',
+    webSocketInstance: '',
+    lists: [{
+      name: '特殊方法',
+      subOpen: false,
+      subList: [{
+        name: '重新加载当前页面',
+        method: 'reload',
+        param: {}
+      }, {
+        name: '重新加载(传jsbundle)',
+        method: 'reload',
+        param: {
+          url: 'http://www.example.com/pinche/register/index?' + 'cml_addr=' + encodeURIComponent('https://static.didialift.com/pinche/gift/chameleon-ui-builtin/weex/chameleon-ui-builtin.js')
+        }
+      }, {
+        name: '获取sdk信息',
+        method: 'getSDKInfo',
+        param: {}
+      }, {
+        name: '触发报错',
+        method: 'triggerError',
+        param: {
+        }
+      }, {
+        name: 'canIUse:getSystemInfo',
+        method: 'canIUse',
+        param: {
+          method: 'getSystemInfo'
+        }
+      }, {
+        name: 'canIUse:showToast',
+        method: 'canIUse',
+        param: {
+          method: 'showToast'
+        }
+      }, {
+        name: 'canIUse:getSomeInfo',
+        method: 'canIUse',
+        param: {
+          method: 'getSomeInfo'
+        }
+      }, {
+        name: 'native主动降级到H5',
+        method: 'rollbackWeb',
+        param: {
+        }
+      }, {
+        name: '获取query',
+        method: 'getQueryObjSync',
+        type: 'sync',
+        param: {
+        }
+      }, {
+        name: '获取启动的url',
+        method: 'getLaunchUrl',
+        param: {
+        }
+      }, {
+        name: '打印weex.config所有参数',
+        method: 'getWeexConfig',
+        param: {
+        }
+      }]
+    }, {
+      name: '提示',
+      subOpen: false,
+      subList: [{
+        name: 'showToast',
+        method: 'showToast',
+        param: {
+          message: '恭喜你答对了！',
+          duration: 2000
+        }
+      }, {
+        name: 'alert',
+        method: 'alert',
+        param: {
+          message: '恭喜你答对了！',
+          confirmTitle: '我知道了'
+        }
+      }, {
+        name: 'confirm',
+        method: 'confirm',
+        param: {
+          message: '是否删除',
+          confirmTitle: '确认',
+          cancelTitle: '取消'
+        }
+      }, {
+        name: '设置title(web)',
+        method: 'setTitle',
+        param: {
+          title: 'ChameleonBridge'
+        }
+      }]
+    }, {
+      name: '打开/关闭',
+      subOpen: false,
+      subList: [{
+        name: '打开新页面（新weex、web）',
+        method: 'open',
+        param: {
+          url: 'http://example.com/pinche/register/index?cml_addr=' + encodeURIComponent('https://static.didialift.com/pinche/gift/chameleon-ui-builtin/weex/chameleon-ui-builtin.js') + '&' + 'weixin_appid=123456',
+          commonPatchParams: {
+            common: 'iamcommon'
+          }
+        }
+      }, {
+        name: '打开新页面（新weex、web）同时关闭当前页面',
+        method: 'open',
+        param: {
+          url: 'http://example.com?wx_addr=' + encodeURIComponent('https://static.didialift.com/pinche/gift/chameleon-ui-builtin/weex/chameleon-ui-builtin.js') + '&' + 'weixin_appid=123456',
+          commonPatchParams: {
+            common: 'iamcommon'
+          },
+          extraOptions: {
+            closeCurrent: true
+          }
+        }
+      }, {
+        name: '关闭页面',
+        method: 'close',
+        param: {
+        }
+      }]
+    }, {
+      name: '存储',
+      subOpen: false,
+      subList: [{
+        name: 'setStorage',
+        method: 'setStorage',
+        param: {
+          key: 'myname',
+          value: 'chameleon',
+        }
+      }, {
+        name: 'getStorage',
+        method: 'getStorage',
+        param: {
+          key: 'myname'
+        }
+      }, {
+        name: 'removeStorage',
+        method: 'removeStorage',
+        param: {
+          key: 'myname'
+        }
+      }]
+    }, {
+      name: '剪切板',
+      subOpen: false,
+      subList: [{
+        name: 'setClipBoardData',
+        method: 'setClipBoardData',
+        param: {
+          data: 'chameleon'
+        }
+      }, {
+        name: 'getClipBoardData',
+        method: 'getClipBoardData',
+        param: {}
+      }]
+    }, {
+      name: '网络请求',
+      subOpen: false,
+      subList: [{
+        name: '发起GET请求',
+        method: 'request',
+        param: {
+          url: 'http://10.179.17.54:9600/api/user',
+          body: { name: 'chameleon' },
+          headers: {},
+          method: 'get',
+          cb: say
+        }
+      }, {
+        name: '发起POST请求',
+        method: 'request',
+        param: {
+          url: 'http://10.179.17.54:9600/api/user/update',
+          body: { name: 'chameleon' },
+          headers: {},
+          method: 'post',
+          cb: say
+        }
+      }, {
+        name: '连接webSocket',
+        method: 'initSocket',
+        param: {
+          url: 'ws://echo.websocket.org'
+        }
+      }, {
+        name: '开启消息监听',
+        method: 'socket.onmessage',
+        param: {}
+      }, {
+        name: '发送数据',
+        method: 'socket.send',
+        param: {
+          name: 'chameleon'
+        }
+      }, {
+        name: '关闭webSocket连接',
+        method: 'socket.close',
+        param: {}
+      }]
+    },
+    // {
+    //   name: '通讯',
+    //   subOpen: false,
+    //   subList: [{
+    //     name: '调起打电话',
+    //     method: 'callPhone',
+    //     param: {
+    //       phoneNumber: '10086'
+    //     }
+    //   }]
+    // }, 
+    {
+      name: '媒体',
+      subOpen: false,
+      subList: [{
+        name: '调起拍照',
+        method: 'chooseImage',
+        param: {
+          type: 'camera'
+        },
+        callback(res) {
+          this.imageBase64 = res.data.base64;
+          say('base64 length:' + res.data.base64.length);
+        }
+      }, {
+        name: '相册',
+        method: 'chooseImage',
+        param: {
+          type: 'album'
+        },
+        callback(res) {
+          this.imageBase64 = res.data.base64;
+          say('base64 length:' + res.data.base64.length);
+        }
+      }, {
+        name: '拍照或相册',
+        method: 'chooseImage',
+        param: {
+          type: 'choice'
+        },
+        callback(res) {
+          this.imageBase64 = res.data.base64;
+          say('base64 length:' + res.data.base64.length);
+        }
+      }]
+    }, {
+      name: '设备',
+      subOpen: false,
+      subList: [{
+        name: '获取设备信息',
+        method: 'getSystemInfo'
+      }]
+    }, {
+      name: '位置',
+      subOpen: false,
+      subList: [{
+        name: '获取位置信息',
+        method: 'getLocationInfo',
+        param: {
+        }
+      }]
+    }]
+  }
+  computed = {
+
+  }
+  watch = {
+
+  }
+  methods = {
+    itemClick(item) {
+      item.subOpen = !item.subOpen
+    },
+    subItemClick(subItem) {
+      const method = subItem.method
+      const type = subItem.type || 'async'
+      const param = subItem.param || {}
+      var callback = subItem.callback || say
+      const socketMethodMatch = method.match(/socket\.(.+)/);
+      const socketOnMethodMatch = method.match(/socket\.(on.+)/);
+
+      // 主动触发错误
+      if (method === 'triggerError') {
+        bridge.nomethod();
+        return;
+      }
+
+      // getWeexConfig
+      if (method === 'getWeexConfig') {
+        say(JSON.stringify(weex.config));
+        return;
+      }
+
+      if (method === 'initSocket') {
+        this.webSocketInstance = bridge[method](param);
+        say('连接socket');
+        return;
+      }
+      if (socketMethodMatch) {
+        if (!this.webSocketInstance) {
+          say('请先连接socket');
+          return;
+        }
+        if (socketOnMethodMatch) {
+          say('操作成功');
+          this.webSocketInstance[socketOnMethodMatch[1]]((res) => {
+            say(res);
+          })
+        } else {
+          this.webSocketInstance[socketMethodMatch[1]](param);
+        }
+      } else {
+        type == 'async' ? bridge[method](param, callback.bind(this)) : callback(bridge[method](param));
+      }
+    }
+  }
+  beforeCreate(res) {
+  }
+  created(res) {
+  }
+  beforeMount(res) {
+  }
+  mounted(res) {
+  }
+  beforeDestroy(res) {
+  }
+  destroyed(res) {
+  }
+
+}
+
+export default new Index();
+
+</script>
+<style scoped>
+.bwx-demo-page {
+  background-color: #f8f8f8;
+}
+
+.bwx-demo-page-header {
+  padding: 80cpx;
+}
+
+.bwx-demo-page-title {
+  color: #333333;
+  font-size: 60cpx;
+}
+
+.bwx-demo-page-desc {
+  margin-top: 5cpx;
+  color: #888888;
+  font-size: 28cpx;
+}
+.bwx-demo-page-main {
+  flex: 1;
+  padding: 0 30cpx 50cpx;
+}
+.bwx-demo-page-main-list {
+}
+.bwx-demo-page-main-list-item {
+  background-color: #ffffff;
+  border-radius: 4cpx;
+  margin: 10cpx 0;
+}
+.bwx-demo-page-main-list-item-panel {
+  padding: 40cpx;
+  border-radius: 4cpx;
+}
+.bwx-demo-page-main-list-item-panel-text {
+  font-size: 36cpx;
+}
+.bwx-demo-page-main-list-item-panel-sub-list {
+  background-color: #ffffff;
+  border-radius: 4cpx;
+  padding: 0cpx 0 40cpx 0;
+}
+.bwx-demo-page-main-list-item-panel-sub-list-item {
+  padding: 20cpx 40cpx;
+}
+.bwx-demo-page-main-list-item-panel-sub-list-item-link-text {
+  font-size: 32cpx;
+}
+.color-grey {
+  color: #808080;
+}
+</style>
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {
+      "demo-com": "/components/demo-com/demo-com"
+    }
+  },
+  "wx": {
+    "navigationBarTitleText": "index",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2"
+  }
+}
+</script>

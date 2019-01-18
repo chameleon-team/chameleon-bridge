@@ -1,0 +1,29 @@
+{
+  "name": "chameleon-bridge",
+  "version": "0.1.0",
+  "description": "bridge for chameleon",
+  "main": "index.js",
+  "author": {
+    "name": "Chameleon-Team",
+    "email": "ChameleonCore@didiglobal.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {},
+  "keywords": [
+    "chameleon",
+    "bridge",
+    "hybrid",
+    "weex"
+  ],
+  "license": "Apache",
+  "devDependencies": {
+    "chameleon-runtime": "^0.0.2",
+    "chameleon-store": "^0.0.3",
+    "cml-ui": "^0.0.2",
+    "chameleon-ui-builtin": "^0.0.2",
+    "chameleon-api": "^0.0.11"
+  }
+}
