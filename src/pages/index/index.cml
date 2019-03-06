@@ -167,7 +167,7 @@ class Index {
       subOpen: false,
       subList: [{
         name: '打开新页面（新weex、web）',
-        method: 'open',
+        method: 'openPage',
         param: {
           url: 'http://example.com/pinche/register/index?cml_addr=' + encodeURIComponent('https://static.didialift.com/pinche/gift/chameleon-ui-builtin/weex/chameleon-ui-builtin.js') + '&' + 'weixin_appid=123456',
           commonPatchParams: {
@@ -176,7 +176,7 @@ class Index {
         }
       }, {
         name: '打开新页面（新weex、web）同时关闭当前页面',
-        method: 'open',
+        method: 'openPage',
         param: {
           url: 'http://example.com?wx_addr=' + encodeURIComponent('https://static.didialift.com/pinche/gift/chameleon-ui-builtin/weex/chameleon-ui-builtin.js') + '&' + 'weixin_appid=123456',
           commonPatchParams: {
