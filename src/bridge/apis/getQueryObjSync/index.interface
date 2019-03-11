@@ -64,3 +64,19 @@ class Method implements QueryInterface {
 }
 export default new Method();
 </script>
+
+<script cml-type="baidu">
+class Method implements QueryInterface {
+  getQueryObjSync() {
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="alipay">
+class Method implements QueryInterface {
+  getQueryObjSync() {
+  }
+}
+export default new Method();
+</script>
