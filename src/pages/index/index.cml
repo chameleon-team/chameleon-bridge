@@ -58,12 +58,12 @@ console.log(bridge);
 const say = msg => {
   bridge.showToast({
     message: msg,
-    duration: 3000
+    duration: 1000
   });
 }
 
-say('当前' + (bridge.inSDK() ? '正' : '未') + '处于SDK中');
-
+// say('当前' + (bridge.inSDK() ? '正' : '未') + '处于SDK中');
+say(process.env.platform)
 class Index {
   data = {
     imageBase64: '',
