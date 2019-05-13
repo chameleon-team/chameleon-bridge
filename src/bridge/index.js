@@ -2,7 +2,7 @@ import * as chooseImage from './apis/chooseImage';
 import * as clipboard from './apis/clipboard';
 import * as close from './apis/close';
 import * as location from './apis/location';
-import * as openPage from './apis/openPage';
+import * as open from './apis/open';
 import * as reload from './apis/reload';
 import * as request from './apis/request';
 import * as rollbackWeb from './apis/rollbackWeb';
@@ -24,7 +24,7 @@ export default {
   ...clipboard,
   ...close,
   ...location,
-  ...openPage,
+  ...open,
   ...reload,
   ...request,
   ...rollbackWeb,

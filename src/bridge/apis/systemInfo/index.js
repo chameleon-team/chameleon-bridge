@@ -24,7 +24,8 @@ export function getSystemInfo(param, cb) {
      */
     // 兼容原始数据结构
     res.data.extraParams.os = res.data.os;
-    
+    res.data.extraParams.deviceModel = WXEnvironment.deviceModel || '';
+
     const { deviceWidth, deviceHeight, scale } = res.data;
     const { viewHeight } = res.data.extraParams;
     res.data.viewportWidth = deviceWidth / scale;

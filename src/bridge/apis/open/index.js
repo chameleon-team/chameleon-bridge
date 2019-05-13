@@ -8,7 +8,7 @@ import {
 const moduleName = 'cml';
 const methodName = 'openPage';
 
-export function openPage(param) {
+export function open(param) {
   /**
    * param: url, commonPatchParams, extraOptions
    */
@@ -25,5 +25,5 @@ export function openPage(param) {
   }, () => { })
 }
 
-openPage.prototype.moduleName = moduleName;
-openPage.prototype.methodName = methodName;
+open.prototype.moduleName = moduleName;
+open.prototype.methodName = methodName;

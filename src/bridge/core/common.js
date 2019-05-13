@@ -1,4 +1,4 @@
-import { BridgeGlobal } from './global';
+import BridgeGlobal from './global.interface';
 import { moduleDefault } from './const';
 
 export function serializeProtocol({ action, module, method, args, callbackId }) {

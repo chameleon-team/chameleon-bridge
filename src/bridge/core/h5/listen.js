@@ -4,9 +4,16 @@ import { dispatchProtocol, registerListen } from '../common';
  * 注册监听通道
  */
 export function init() {
-  window.cmlBridge = {};
-  window.cmlBridge.channel = function (protocol) {
-    dispatchProtocol(protocol);
+  if (!window.cmlBridge) {
+    window.cmlBridge = {
+      channel: function (protocol) {
+        dispatchProtocol(protocol);
+      }
+    };
+  } else {
+    window.cmlBridge.channel = function (protocol) {
+      dispatchProtocol(protocol);
+    }
   }
 }
 

@@ -62,8 +62,8 @@ const say = msg => {
   });
 }
 
-// say('当前' + (bridge.inSDK() ? '正' : '未') + '处于SDK中');
-say(process.env.platform)
+say('当前' + (bridge.inSDK() ? '正' : '未') + '处于' + process.env.platform + ' SDK中');
+// say(process.env.platform)
 class Index {
   data = {
     imageBase64: '',
@@ -167,7 +167,7 @@ class Index {
       subOpen: false,
       subList: [{
         name: '打开新页面（新weex、web）',
-        method: 'openPage',
+        method: 'open',
         param: {
           url: 'http://example.com/pinche/register/index?cml_addr=' + encodeURIComponent('https://static.didialift.com/pinche/gift/chameleon-ui-builtin/weex/chameleon-ui-builtin.js') + '&' + 'weixin_appid=123456',
           commonPatchParams: {
@@ -176,7 +176,7 @@ class Index {
         }
       }, {
         name: '打开新页面（新weex、web）同时关闭当前页面',
-        method: 'openPage',
+        method: 'open',
         param: {
           url: 'http://example.com?wx_addr=' + encodeURIComponent('https://static.didialift.com/pinche/gift/chameleon-ui-builtin/weex/chameleon-ui-builtin.js') + '&' + 'weixin_appid=123456',
           commonPatchParams: {
@@ -331,6 +331,7 @@ class Index {
       subOpen: false,
       subList: [{
         name: '获取位置信息',
+        type: 'async',
         method: 'getLocationInfo',
         param: {
         }

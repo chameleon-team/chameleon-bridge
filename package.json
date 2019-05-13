@@ -1,6 +1,6 @@
 {
   "name": "chameleon-bridge",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "bridge for chameleon",
   "main": "index.js",
   "author": {
@@ -24,6 +24,6 @@
     "chameleon-store": "^0.0.3",
     "cml-ui": "^0.0.2",
     "chameleon-ui-builtin": "^0.0.2",
-    "chameleon-api": "^0.0.11"
+    "chameleon-api": "^0.4.10"
   }
 }

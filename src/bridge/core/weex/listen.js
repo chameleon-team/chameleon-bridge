@@ -5,6 +5,10 @@ var globalEvent = weex.requireModule('globalEvent');
  * 注册监听通道
  */
 export function init() {
+  if (WXEnvironment.addedListener) return;
+  // 确保只有一个在监听的通道, 防止通道并行重复触发 暂时注释, 会影响安卓部分功能
+  WXEnvironment.addedListener = true;
+
   globalEvent.addEventListener('cmlBridgeChannel', function (ptc) {
     let ptcStr = ptc.protocol;
     dispatchProtocol(ptcStr);
