@@ -1,5 +1,6 @@
 import BridgeGlobal from './global.interface';
 import { moduleDefault } from './const';
+import { isArray } from '../utils';
 
 export function serializeProtocol({ action, module, method, args, callbackId }) {
   const param = encodeURIComponent(JSON.stringify(args));
@@ -92,6 +93,11 @@ export function dispatchProtocol(protocol) {
   let instance = BridgeGlobal.getInstance();
 
   if (action === 'callbackToJs') {
+    if (isArray(args)) {
+      args = {
+        transData: args
+      }
+    }
     instance.listenCallbacks[callbackId] && instance.listenCallbacks[callbackId](args);
   }
 
