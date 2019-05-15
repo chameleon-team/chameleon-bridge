@@ -395,7 +395,21 @@ class Index {
           id:this.audioId,
           mesc:2000
         }
-      }
+      },
+      {
+        name: '音频缓存变化通知',
+        type: 'listen',
+        method: 'audioBufferChange',
+        param: {
+        }
+      },
+      {
+        name: '音频状态变化通知',
+        type: 'listen',
+        method: 'audioStatusChange',
+        param: {
+        }
+      },
       ]
     }]
   }
@@ -447,7 +461,10 @@ class Index {
         } else {
           this.webSocketInstance[socketMethodMatch[1]](param);
         }
-      } else {
+      } else if(type == 'listen'){
+        bridge[method](callback.bind(this))
+      }
+      else{
         type == 'async' ? bridge[method](param, callback.bind(this)) : callback(bridge[method](param));
       }
     }
