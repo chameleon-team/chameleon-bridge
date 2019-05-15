@@ -2,12 +2,14 @@ import { callNative ,listenNative} from '../../core/index.js'
 
 const moduleName = 'audio';
 //创建audio上下文
-export function createWeexAudio(param, cb) {
+export function createWeexAudio(param, cb =() => {}) {
   /**
    * @params:
    * moduleName:audio
    * methodPlay:create
-   * param:{} 空
+   * param:url : audio地址
+    looping：是否循环播放 "1"-是， ”0“-否
+    volume：该player的音量，默认为1.0f
    */
   callNative(moduleName, 'create', param, function (res) {
     /**
@@ -18,23 +20,8 @@ export function createWeexAudio(param, cb) {
     cb(res);
   });
 }
-//设置或者重置audio
-export function resetWeexAudio(param, cb) {
-  /**
-   * @moduleName:audio
-   * @methodPlay:reset
-   * @param:{id:1,url:audio地址}
-   */
-  callNative(moduleName, 'reset', param, function (res) {
-    /**
-     * errno
-     * msg
-     */
-    cb(res);
-  });
-}
 //播放audio
-export function playWeexAudio(param, cb) {
+export function playWeexAudio(param, cb = () => {}) {
   /**
    * @moduleName:audio
    * @method:play
@@ -51,7 +38,7 @@ export function playWeexAudio(param, cb) {
 
 
 //暂停audio
-export function pauseWeexAudio(param, cb) {
+export function pauseWeexAudio(param, cb = () => {}) {
   /**
    * @moduleName:audio
    * @method:pause
@@ -66,7 +53,7 @@ export function pauseWeexAudio(param, cb) {
   });
 }
 //设置player进度
-export function seekToWeexAudio(param, cb) {
+export function seekToWeexAudio(param, cb = () => {}) {
   /**
    * @moduleName:audio
    * @method:seekTo
@@ -82,7 +69,7 @@ export function seekToWeexAudio(param, cb) {
   });
 }
 //获取player进度
-export function getWeexAudioCurrentPos(param, cb) {
+export function getWeexAudioCurrentPos(param, cb = () => {}) {
   /**
    * @moduleName:audio
    * @method:currentPos
@@ -98,7 +85,7 @@ export function getWeexAudioCurrentPos(param, cb) {
   });
 }
 //释放player
-export function destroyAudio(param, cb) {
+export function destroyAudio(param, cb = () => {}) {
   /**
    * @moduleName:audio
    * @method:destroy
@@ -113,7 +100,7 @@ export function destroyAudio(param, cb) {
   });
 }
 //player缓存变化通知
-export function audioBufferChange(cb) {
+export function audioBufferChange(cb = () => {}) {
   /**
    * @moduleName:audio
    * @methodPlay:play
@@ -129,7 +116,7 @@ export function audioBufferChange(cb) {
 }
 
 //player状态变化通知
-export function audioStatusChange(cb) {
+export function audioStatusChange(cb = () => {}) {
   /**
    * @moduleName:audio
    * @methodPlay:play
