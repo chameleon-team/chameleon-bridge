@@ -462,7 +462,8 @@ class Index {
           this.webSocketInstance[socketMethodMatch[1]](param);
         }
       } else if(type == 'listen'){
-        bridge[method](callback.bind(this))
+        bridge[method](callback.bind(this));
+        say(`注册${subItem.name}成功`)
       }
       else{
         type == 'async' ? bridge[method](param, callback.bind(this)) : callback(bridge[method](param));
