@@ -350,6 +350,7 @@ class Index {
           looping:'1',
         },
         callback(res){
+          debugger;
           say(JSON.stringify(res.data));
           this.audioId = res.data.id;
         }
@@ -415,7 +416,6 @@ class Index {
     }]
   }
   computed = {
-
   }
   watch = {
 
@@ -427,7 +427,12 @@ class Index {
     subItemClick(subItem) {
       const method = subItem.method
       const type = subItem.type || 'async'
-      const param = subItem.param || {}
+      let param = subItem.param || {};
+      if(['playWeexAudio','pauseWeexAudio','seekToWeexAudio','getWeexAudioCurrentPos','destroyAudio'].includes(method)){
+        param = Object.assign(param,{
+          id:this.audioId
+        })
+      }
       var callback = subItem.callback || say
       const socketMethodMatch = method.match(/socket\.(.+)/);
       const socketOnMethodMatch = method.match(/socket\.(on.+)/);
