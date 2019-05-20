@@ -437,7 +437,7 @@ class Index {
       let param = subItem.param || {};
       if(['playWeexAudio','pauseWeexAudio','seekToWeexAudio','getWeexAudioCurrentPos','destroyAudio'].includes(method)){
         param = Object.assign(param,{
-          id:this.audioIdStack[this.audioPos]
+          id:this.audioStack[this.audioPos]
         })
       }
       var callback = subItem.callback || say
