@@ -377,7 +377,7 @@ class Index {
         method: 'seekToWeexAudio',
         param: {
           id:this.audioId,
-          mesc:2000
+          msec:2000
         }
       },
       {
@@ -386,7 +386,6 @@ class Index {
         method: 'getWeexAudioCurrentPos',
         param: {
           id:this.audioId,
-          mesc:2000
         }
       },
       {
