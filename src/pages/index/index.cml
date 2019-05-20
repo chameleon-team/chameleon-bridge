@@ -68,7 +68,8 @@ class Index {
   data = {
     imageBase64: '',
     webSocketInstance: '',
-    audioId:'',
+    audioStack:[],
+    audioPos:0,
     lists: [{
       name: '特殊方法',
       subOpen: false,
@@ -351,8 +352,9 @@ class Index {
         },
         callback(res){
           debugger;
-          say(JSON.stringify(res.data));
-          this.audioId = res.data.id;
+          if(res.errno == 0){ //创建成功才放入
+            this.audioStack.push(res.data.id);
+          }
         }
       },
       {
@@ -360,7 +362,6 @@ class Index {
         type: 'async',
         method: 'playWeexAudio',
         param: {
-          id:this.audioId,
         }
       },
       {
@@ -368,7 +369,6 @@ class Index {
         type: 'async',
         method: 'pauseWeexAudio',
         param: {
-          id:this.audioId,
         }
       },
       {
@@ -376,7 +376,6 @@ class Index {
         type: 'async',
         method: 'seekToWeexAudio',
         param: {
-          id:this.audioId,
           msec:2000
         }
       },
@@ -385,7 +384,6 @@ class Index {
         type: 'async',
         method: 'getWeexAudioCurrentPos',
         param: {
-          id:this.audioId,
         }
       },
       {
@@ -393,8 +391,11 @@ class Index {
         type: 'async',
         method: 'destroyAudio',
         param: {
-          id:this.audioId,
-          mesc:2000
+        },
+        callback(res){
+          if(res.errno == 0){ //释放成功才摧毁
+            this.audioStack.splice(this.audioPos,1);
+          }
         }
       },
       {
@@ -408,6 +409,13 @@ class Index {
         name: '音频状态变化通知',
         type: 'listen',
         method: 'audioStatusChange',
+        param: {
+        }
+      },
+      {
+        name: '改变音频id',
+        type: 'developer',
+        method: 'changeAudioId',
         param: {
         }
       },
@@ -429,7 +437,7 @@ class Index {
       let param = subItem.param || {};
       if(['playWeexAudio','pauseWeexAudio','seekToWeexAudio','getWeexAudioCurrentPos','destroyAudio'].includes(method)){
         param = Object.assign(param,{
-          id:this.audioId
+          id:this.audioIdStack[this.audioPos]
         })
       }
       var callback = subItem.callback || say
@@ -469,11 +477,23 @@ class Index {
       } else if(type == 'listen'){
         bridge[method](callback.bind(this));
         say(`注册${subItem.name}成功`)
+      }else if(type === 'developer'){
+        this[method]();
       }
       else{
         type == 'async' ? bridge[method](param, callback.bind(this)) : callback(bridge[method](param));
       }
+    },
+    changeAudioId(){ 
+      console.log('changeId')
+      if(this.audioPos < this.audioStack.length - 1){
+        this.audioPos = this.audioPos + 1;
+      }else{
+        this.audioPos = 0;
+      }
+      say(`audioPos ${this.audioPos}`)
     }
+
   }
   beforeCreate(res) {
   }
