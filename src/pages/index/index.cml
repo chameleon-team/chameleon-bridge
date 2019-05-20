@@ -58,7 +58,7 @@ console.log(bridge);
 const say = msg => {
   bridge.showToast({
     message: msg,
-    duration: 1000
+    duration: 2000
   });
 }
 
@@ -350,7 +350,7 @@ class Index {
           looping:'1',
         },
         callback(res){
-          say(JSON.stringify(res));
+          say(JSON.stringify(res.data));
           this.audioId = res.data.id;
         }
       },
