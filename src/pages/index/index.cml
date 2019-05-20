@@ -350,6 +350,7 @@ class Index {
           looping:'1',
         },
         callback(res){
+          say(JSON.stringify(res));
           this.audioId = res.data.id;
         }
       },
