@@ -18,7 +18,7 @@ import * as ui from './apis/ui';
 import * as inSDK from './apis/inSDK';
 import * as getComponentRect from './apis/getComponentRect/index.js';
 import * as core from './core/index.js';
-
+import * as audio from './apis/audio/index.js';
 export default {
   ...chooseImage,
   ...clipboard,
@@ -40,5 +40,6 @@ export default {
   ...ui,
   ...inSDK,
   ...getComponentRect,
-  ...core
+  ...core,
+  ...audio
 };
