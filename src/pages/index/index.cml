@@ -346,7 +346,7 @@ class Index {
         type: 'async',
         method: 'createWeexAudio',
         param: {
-          url:'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400',
+          url:'http://p1.music.126.net/bYTctrjUegSyzDPteIeNOw==/74766790705099.jpg?imageView&thumbnail=360y360&quality=75&tostatic=0',
           volume:0.5,
           looping:'1',
         },
@@ -404,9 +404,9 @@ class Index {
         method: 'audioBufferChange',
         param: {
         },
-        callbakc(res){
-          say(JSON.stringify(res));
-        }
+        // callbakc(res){
+        //   say(JSON.stringify(res));
+        // }
       },
       {
         name: '音频状态变化通知',
@@ -414,9 +414,9 @@ class Index {
         method: 'audioStatusChange',
         param: {
         },
-        callbakc(res){
-          say(JSON.stringify(res));
-        }
+        // callbakc(res){
+        //   say(JSON.stringify(res));
+        // }
       },
       {
         name: '改变音频id',
