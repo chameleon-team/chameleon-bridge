@@ -56,7 +56,6 @@ import bridge from '../../bridge/index.js';
 console.log(bridge);
 
 const say = msg => {
-  msg = JSON.stringify(msg);
   bridge.showToast({
     message: msg,
     duration: 2000
@@ -404,6 +403,9 @@ class Index {
         type: 'listen',
         method: 'audioBufferChange',
         param: {
+        },
+        callbakc(res){
+          say(JSON.stringify(res));
         }
       },
       {
@@ -411,6 +413,9 @@ class Index {
         type: 'listen',
         method: 'audioStatusChange',
         param: {
+        },
+        callbakc(res){
+          say(JSON.stringify(res));
         }
       },
       {
