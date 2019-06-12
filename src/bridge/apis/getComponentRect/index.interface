@@ -48,6 +48,14 @@ class Method implements DomInterface {
 export default new Method();
 </script>
 
+<script cml-type="qq">
+class Method implements DomInterface {
+  getComponentRect(param, cb) {
+  }
+}
+export default new Method();
+</script>
+
 <script cml-type="baidu">
 class Method implements DomInterface {
   getComponentRect(param, cb) {

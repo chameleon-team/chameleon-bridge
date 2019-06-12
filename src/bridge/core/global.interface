@@ -69,6 +69,14 @@ class Method implements BridgeGlobal {
 export default new Method();
 </script>
 
+<script cml-type="qq">
+class Method implements BridgeGlobal {
+  getInstance() {
+  }
+}
+export default new Method();
+</script>
+
 <script cml-type="baidu">
 class Method implements BridgeGlobal {
   getInstance() {
