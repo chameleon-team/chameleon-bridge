@@ -37,8 +37,12 @@ export function deserializeProtocol(ptcStr) {
   } catch (e) {
   }
 
+  if (!args) {
+    args = {};
+  }
+
   try {
-    if(args.data) {
+    if (args.data) {
       args.data = decodeURIComponent(args.data)
       args.data = JSON.parse(args.data)
     }
