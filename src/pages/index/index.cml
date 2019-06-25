@@ -458,7 +458,7 @@ class Index {
 
       // getWeexConfig
       if (method === 'getWeexConfig') {
-        say(JSON.stringify(weex.config));
+        // say(JSON.stringify(weex.config));
         return;
       }
 
@@ -508,6 +508,12 @@ class Index {
   beforeMount(res) {
   }
   mounted(res) {
+    // 安卓端 weex 情况下, 点击物理返回键触发的逻辑
+    bridge.listenNative('cml', 'onBackPressed', res => {
+      bridge.alert({
+        message: '返回键被我拦住了, 我在mounted这儿'
+      })
+    })
   }
   beforeDestroy(res) {
   }

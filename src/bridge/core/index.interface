@@ -59,6 +59,18 @@ class Method implements CoreInterface {
 export default new Method();
 </script>
 
+<script cml-type="qq">
+class Method implements CoreInterface {
+  initChannel() {
+  }
+  callNative(module, method, args, callback) {
+  }
+  listenNative(module, method, callback) {
+  }
+}
+export default new Method();
+</script>
+
 <script cml-type="baidu">
 class Method implements CoreInterface {
   initChannel() {
