@@ -15,7 +15,9 @@ export function serializeProtocol({ action, module, method, args, callbackId }) 
 
 export function deserializeProtocol(ptcStr) {
   let ptcObj = {};
-  let arr = ptcStr && ptcStr.split(/(\?|&)/);
+  //let arr = ptcStr && ptcStr.split(/(\?|&)/);
+  //args中的json字符串某个字段可能包含了？&符号，会导致字符串分割错误；
+  let arr = ptcStr && ptcStr.substr(ptcStr.indexOf('?') + 1).split('&');
   for (let i = 0; i < arr.length; i++) {
     if (~arr[i].indexOf('=')) {
       let keyValue = arr[i].match(/([^=]*)=(.*)/);
