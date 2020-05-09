@@ -71,3 +71,19 @@ class Method implements DomInterface {
 }
 export default new Method();
 </script>
+
+<script cml-type="tt">
+class Method implements DomInterface {
+  getComponentRect(param, cb) {
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="quickapp">
+class Method implements DomInterface {
+  getComponentRect(param, cb) {
+  }
+}
+export default new Method();
+</script>

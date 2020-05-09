@@ -1,8 +1,11 @@
-import { callNative ,listenNative} from '../../core/index.js'
+import {
+  callNative,
+  listenNative
+} from '../../core/index.js'
 
 const moduleName = 'audio';
 //创建audio上下文
-export function createWeexAudio(param, cb =() => {}) {
+export function createWeexAudio(param, cb = () => {}) {
   /**
    * @params:
    * moduleName:audio
@@ -11,7 +14,6 @@ export function createWeexAudio(param, cb =() => {}) {
     looping：是否循环播放 "1"-是， ”0“-否
     volume：该player的音量，默认为1.0f
    */
-  debugger;
   callNative(moduleName, 'create', param, function (res) {
     /**
      * errno

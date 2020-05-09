@@ -92,3 +92,19 @@ class Method implements BridgeGlobal {
 }
 export default new Method();
 </script>
+
+<script cml-type="tt">
+class Method implements BridgeGlobal {
+  getInstance() {
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="quickapp">
+class Method implements BridgeGlobal {
+  getInstance() {
+  }
+}
+export default new Method();
+</script>

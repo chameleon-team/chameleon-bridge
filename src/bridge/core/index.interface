@@ -94,3 +94,27 @@ class Method implements CoreInterface {
 }
 export default new Method();
 </script>
+
+<script cml-type="tt">
+class Method implements CoreInterface {
+  initChannel() {
+  }
+  callNative(module, method, args, callback) {
+  }
+  listenNative(module, method, callback) {
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="quickapp">
+class Method implements CoreInterface {
+  initChannel() {
+  }
+  callNative(module, method, args, callback) {
+  }
+  listenNative(module, method, callback) {
+  }
+}
+export default new Method();
+</script>
